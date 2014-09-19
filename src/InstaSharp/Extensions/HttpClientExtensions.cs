@@ -30,7 +30,7 @@ namespace InstaSharp.Extensions
                 }
 
             }
-            catch (HttpRequestException exc)
+            catch (HttpRequestException)
             {
                 if (resultData.Trim().StartsWith("{") || resultData.Trim().StartsWith("["))
                 {
