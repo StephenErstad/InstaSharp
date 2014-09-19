@@ -39,6 +39,7 @@ namespace InstaSharp.Models
         /// <value>
         /// The rate limit
         /// </value>
+        [JsonProperty("rateLimitRemaining")]
         public int RateLimitLimit { get; set; }
         /// <summary>
         /// Gets or sets the remaining calls from the rate limit
@@ -46,6 +47,7 @@ namespace InstaSharp.Models
         /// <value>
         /// The remain calls from the rate limit
         /// </value>
+        [JsonProperty("rateLimitLimit")]
         public int RateLimitRemaining { get; set; }
 
     }
