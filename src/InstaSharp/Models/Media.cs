@@ -7,7 +7,7 @@ namespace InstaSharp.Models {
     /// <summary>
     /// The Media Object
     /// </summary>
-    public class Media {
+    public class Media : JsonObject{
         /// <summary>
         /// Gets or sets the location.
         /// </summary>

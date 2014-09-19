@@ -21,6 +21,7 @@ namespace InstaSharp.Tests
         {
             var result = await media.Get("555");
             Assert.IsTrue(result.Data != null);
+            Assert.IsFalse(string.IsNullOrEmpty(result.Data.Json));
         }
 
         [TestMethod, TestCategory("Media.Get")]

@@ -33,5 +33,20 @@ namespace InstaSharp.Models
         /// </value>
         [JsonProperty("error_message")]
         public string ErrorMessage { get; set; }
+        /// <summary>
+        /// Gets or sets the rate limit
+        /// </summary>
+        /// <value>
+        /// The rate limit
+        /// </value>
+        public int RateLimitLimit { get; set; }
+        /// <summary>
+        /// Gets or sets the remaining calls from the rate limit
+        /// </summary>
+        /// <value>
+        /// The remain calls from the rate limit
+        /// </value>
+        public int RateLimitRemaining { get; set; }
+
     }
 }
