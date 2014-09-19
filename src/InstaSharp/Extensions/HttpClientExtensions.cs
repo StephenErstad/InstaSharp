@@ -32,17 +32,7 @@ namespace InstaSharp.Extensions
             }
             catch (HttpRequestException)
             {
-                if (resultData.Trim().StartsWith("{") || resultData.Trim().StartsWith("["))
-                {
-                    ErrorResponse error = JsonConvert.DeserializeObject<ErrorResponse>(resultData);
-                    JObject errorJSON = new JObject();
-                    errorJSON.Add(new JProperty("meta", (JObject)JToken.FromObject(error)));
-                    resultData = errorJSON.ToString();
-                }
-                else
-                {
-                    resultData = "{}";
-                }
+            
             }
 
             return JsonConvert.DeserializeObject<T>(resultData, new MediaConverter());
