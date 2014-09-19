@@ -16,23 +16,15 @@ namespace InstaSharp.Extensions
         {
             var response = await client.SendAsync(request);
             string resultData = await response.Content.ReadAsStringAsync();
-            try
-            {
-                response.EnsureSuccessStatusCode();
-                var rateLimitRemaining = new List<string>().AsEnumerable();
-                var rateLimitLimit = new List<string>().AsEnumerable();
-                if (response.Headers.TryGetValues(@"X-Ratelimit-Remaining", out rateLimitRemaining))
-                {
-                    JObject jsonResult = JObject.Parse(resultData);
-                    jsonResult["meta"]["rateLimitRemaining"] = rateLimitRemaining.FirstOrDefault();
-                    jsonResult["meta"]["rateLimitLimit"] = response.Headers.TryGetValues(@"X-Ratelimit-Limit", out rateLimitLimit) ? rateLimitLimit.FirstOrDefault() : "5000";
-                    resultData = jsonResult.ToString();
-                }
 
-            }
-            catch (HttpRequestException)
+            var rateLimitRemaining = new List<string>().AsEnumerable();
+            var rateLimitLimit = new List<string>().AsEnumerable();
+            if (response.Headers.TryGetValues(@"X-Ratelimit-Remaining", out rateLimitRemaining))
             {
-            
+                JObject jsonResult = JObject.Parse(resultData);
+                jsonResult["meta"]["rateLimitRemaining"] = rateLimitRemaining.FirstOrDefault();
+                jsonResult["meta"]["rateLimitLimit"] = response.Headers.TryGetValues(@"X-Ratelimit-Limit", out rateLimitLimit) ? rateLimitLimit.FirstOrDefault() : "5000";
+                resultData = jsonResult.ToString();
             }
 
             return JsonConvert.DeserializeObject<T>(resultData, new MediaConverter());
